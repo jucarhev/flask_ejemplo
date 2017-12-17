@@ -5,8 +5,8 @@
 	<title>{% block title %}{% endblock %}</title>
 	<link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap-theme.css') }}">
-	<script src="{{ url_for('static',filename='js/jquery.css') }}"></script>
-	<script src="{{ url_for('static',filename='js/boostrap.css') }}"></script>
+	<script src="{{ url_for('static',filename='js/jquery.js') }}"></script>
+	<script src="{{ url_for('static',filename='js/boostrap.js') }}"></script>
 </head>
 <body>
 
@@ -33,5 +33,9 @@
 			</div>
 		</div>
 	</footer>
+
+	<script src="{{ url_for('static',filename='js/jquery.js') }}"></script>
+	<script src="{{ url_for('static',filename='js/boostrap.js') }}"></script>
+	<script src="{{ url_for('static',filename='js/functions.js') }}"></script>
 </body>
 </html>

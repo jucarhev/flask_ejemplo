@@ -22,6 +22,12 @@
 					</div>
 					<div class="row control-group">
 						<div class="form-group col-xs-12 fliating-label-form-group controls">
+							{{ render_field(form.email, class='form-control') }}
+							<p class="help-block text-danger"></p>
+						</div>
+					</div>
+					<div class="row control-group">
+						<div class="form-group col-xs-12 fliating-label-form-group controls">
 							{{ render_field(form.password, class='form-control') }}
 							<p class="help-block text-danger"></p>
 						</div>
