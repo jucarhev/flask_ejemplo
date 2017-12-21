@@ -11,17 +11,6 @@ def length_honeypot(form,field):
 		raise validators.ValidationError("El campo debe estar vacio")
 
 class CommentForm(Form):
-	username = StringField('username',
-		[
-			validators.length(min=4,max=35,message="Ingrese usuario valido"),
-			validators.required(message="Requiere usuario")
-		])
-
-	email = EmailField('Correro electronico',
-		[
-			validators.Email()
-		])
-
 	comment = TextField('Comentario',
 		[
 			validators.required(message="Requiere usuario"),

@@ -19,9 +19,11 @@ from flask import make_response
 from flask_wtf import CSRFProtect
 
 import forms
+from helper import date_format
 
 from models import db
 from models import User
+from models import Comment
 
 from config import DevelopmentConfig
 
@@ -95,18 +97,21 @@ def index():
 def comment():
 	comment_form = forms.CommentForm(request.form)
 	if request.method == 'POST' and comment_form.validate():
-		print comment_form.username.data
-		print comment_form.email.data
-		print comment_form.comment.data
-	else:
-		print "Error en formulario"
+		user_id = User.query.filter_by(username = session['username']).first()
+		#print user_id.id
+		comment = Comment(user_id = user_id.id,text=comment_form.comment.data)
+		db.session.add(comment)
+		db.session.commit()
 
 	title = "comments"
 	return render_template('comment.html',title=title,form=comment_form)
 
-@app.route('/reviews')
-def review():
-	pass
+@app.route('/reviews/<int:page>',methods=['GET'])
+@app.route('/reviews',methods=['GET'])
+def reviews(page=1):
+	per_page = 3
+	comment_list = Comment.query.join(User).add_columns(User.username,Comment.text,Comment.create_date).paginate(page,per_page,False)
+	return render_template('reviews.html',comments = comment_list,date_format=date_format)
 
 @app.route('/create',methods=['GET','POST'])
 def create():
