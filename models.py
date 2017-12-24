@@ -13,6 +13,7 @@ class User(db.Model):
 	email = db.Column(db.String(50))
 	password = db.Column(db.String(100))
 	comments = db.relationship('Comment')
+	posts 	 = db.relationship('Post')
 	create_date = db.Column(db.DateTime, default=datetime.datetime.now)
 
 	def __init__(self,username,email,password):
@@ -31,5 +32,17 @@ class Comment(db.Model):
 
 	id = db.Column(db.Integer, primary_key = True)
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+	posts_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 	text = db.Column(db.Text())
+	create_date = db.Column(db.DateTime, default=datetime.datetime.now)
+
+class Post(db.Model):
+	__tablename__ = 'posts'
+
+	id = db.Column(db.Integer,primary_key=True)
+	user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+	posts = db.relationship('Comment')
+	title = db.Column(db.String(60))
+	content = db.Column(db.Text())
+	imagen = db.Column(db.Text(), default='None.jpg')
 	create_date = db.Column(db.DateTime, default=datetime.datetime.now)

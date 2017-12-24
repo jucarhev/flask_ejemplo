@@ -1,5 +1,5 @@
 from wtforms import Form
-from wtforms import StringField, TextField, PasswordField
+from wtforms import StringField, TextField, PasswordField,TextAreaField
 from wtforms.fields.html5 import EmailField
 from wtforms import validators
 from wtforms import HiddenField
@@ -52,3 +52,12 @@ class FormCreate(Form):
 		user = User.query.filter_by(username=username).first()
 		if user is not None:
 			raise validators.ValidationError("El usuario ya esta en uso")
+
+class FormNewPost(Form):
+	title = StringField('Titulo',[
+				validators.required('Se requiere este campo')
+			])
+	content = TextAreaField('Content',[
+				validators.required('Se requiere este campo')
+			])
+	honeypot = HiddenField("",[length_honeypot])
