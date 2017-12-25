@@ -4,6 +4,7 @@ def date_format(value):
 	return "{} de {} de {}".format(value.day, month, value.year)
 
 def featurepagination(page,items,per_page):
+	"""Solo obtiene el numero de paginas totales"""
 	resulti = items / per_page
 	resultf = items % per_page
 	if resultf != 0:

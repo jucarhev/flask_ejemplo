@@ -109,8 +109,7 @@ def post(id,title):
 		db.session.add(comment)
 		db.session.commit()
 
-	comment_list = User.query.join(Comment).join(Post).filter_by(id=id).add_columns(Comment.user_id,User.username,Comment.text,Comment.create_date).paginate(1,100,False)
-	print(comment_list)
+	comment_list = User.query.join(Comment).join(Post).filter_by(id=id).add_columns(Comment.user_id,User.username,Comment.text,Comment.create_date).paginate(1,1000,False)
 	return render_template('post.html',post=post,form=comment_form,date_format=date_format,comments=comment_list)
 
 @app.route('/comment',methods=['GET','POST'])
